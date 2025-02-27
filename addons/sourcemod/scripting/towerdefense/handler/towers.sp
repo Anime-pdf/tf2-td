@@ -892,7 +892,8 @@ stock float Tower_GetPitch(TDTowerId iTowerId) {
 			return 10.0;
 		}
 
-		return (float)iPitch;
+		float fPitch = float(iPitch);
+		return fPitch;
 	}
 
 	return 10.0;
