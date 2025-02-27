@@ -250,6 +250,14 @@
   {
     "de"      "{1} erhielt {2} Metall von dir."
   }
+  "cmdMetalHudOn"
+  {
+    "de"      "Metall auf dem Bildschirm eingeschaltet."
+  }
+  "cmdMetalHudOff"
+  {
+    "de"      "Metall auf dem Bildschirm ausgeschaltet."
+  }
   //forbid
   "forbidSetWaveMidWave"
   {

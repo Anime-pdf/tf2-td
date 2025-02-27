@@ -293,6 +293,14 @@
     "#format" "{1:N},{2:d}"
     "en"      "{1} received {2} metal from you."
   }
+  "cmdMetalHudOn"
+  {
+    "en"      "Metal display on screen turned ON."
+  }
+  "cmdMetalHudOff"
+  {
+    "en"      "Metal display on screen turned OFF."
+  }
   //forbid
   "forbidSetWaveMidWave"
   {
