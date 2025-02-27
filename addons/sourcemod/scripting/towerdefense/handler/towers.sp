@@ -472,7 +472,7 @@ stock void Tower_Drop(int iClient) {
 	SetEntityMoveType(iTower, MOVETYPE_WALK);
 
 	GetClientAbsOrigin(iClient, fLocation);
-	GetClientAbsAngles(iClient, fAngles);
+	GetClientEyeAngles(iClient, fAngles);
 
 	fAngles[0] = Tower_GetPitch(GetTowerId(iTower));
 
