@@ -75,4 +75,9 @@ public void OnConVarChanged(ConVar hConVar, const char[] sOldValue, const char[]
 	} else if (hConVar == g_hMaxBotsOnField) {
 		UpdateMaxBotsOnField();
 	}
+	else {
+		char ConVarName[128];
+		hConVar.GetName(ConVarName, sizeof(ConVarName));
+		LogType(TDLogLevel_Trace, TDLogType_FileAndConsole, "ConVar '%s' changed. Old Value: %d - New Value: %d", ConVarName, StringToInt(sOldValue), StringToInt(sNewValue));
+	}
 }
