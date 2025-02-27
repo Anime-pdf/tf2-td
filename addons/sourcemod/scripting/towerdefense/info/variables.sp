@@ -34,6 +34,7 @@ ConVar g_hEnabled;
 ConVar g_hTfBotQuota;
 ConVar g_hSvVisibleMaxPlayers;
 ConVar g_hMaxBotsOnField;
+ConVar g_hCustomTowerPitch;
 
 /*==========  Handle  ==========*/
 

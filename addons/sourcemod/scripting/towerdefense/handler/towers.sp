@@ -474,6 +474,7 @@ stock void Tower_Drop(int iClient) {
 	GetClientAbsOrigin(iClient, fLocation);
 	GetClientEyeAngles(iClient, fAngles);
 
+	if(!g_hCustomTowerPitch.BoolValue)
 	fAngles[0] = Tower_GetPitch(GetTowerId(iTower));
 
 	TeleportEntity(iTower, fLocation, fAngles, NULL_VECTOR);

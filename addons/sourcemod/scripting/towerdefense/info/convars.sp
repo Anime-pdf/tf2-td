@@ -12,6 +12,7 @@ stock void CreateConVars() {
 	CreateConVar("td_version", PLUGIN_VERSION, "Tower Defense Version", FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	g_hEnabled = CreateConVar("td_enabled", "1", "Enables/disables Tower Defense", FCVAR_DONTRECORD, true, 0.0, true, 1.0);
 	g_hMaxBotsOnField = CreateConVar("td_max_bots_on_field", "8", "Max bots simultaneously on field. Might be actually lower than set due to maxplayer limit");
+	g_hCustomTowerPitch = CreateConVar("td_custom_tower_pitch", "1", "Set pitch to player's, not to default", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
 }
 
 stock void LoadConVars() {
@@ -20,6 +21,7 @@ stock void LoadConVars() {
 	g_hTfBotQuota = FindConVar("tf_bot_quota");
 	g_hSvVisibleMaxPlayers = FindConVar("sv_visiblemaxplayers");
 	g_hTfBotQuota.AddChangeHook(OnConVarChanged);
+	g_hCustomTowerPitch.AddChangeHook(OnConVarChanged);
 }
 
 stock void SetConVars() {
