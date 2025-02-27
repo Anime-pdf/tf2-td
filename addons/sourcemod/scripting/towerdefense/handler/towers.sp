@@ -889,13 +889,13 @@ stock float Tower_GetPitch(TDTowerId iTowerId) {
 
 		int iPitch = 0;
 		if (!GetTrieValue(g_hMapTowers, sKey, iPitch)) {
-			return 0.0;
+			return 10.0;
 		}
 
-		return float(iPitch);
+		return (float)iPitch;
 	}
 
-	return 0.0;
+	return 10.0;
 }
 
 /**
