@@ -417,7 +417,7 @@ stock void Tower_Pickup(int iClient) {
 			return;
 		}
 	
-		if(g_bTowersLocked){
+		if(!g_hAllowPickingTowersMidwave.BoolValue && g_bTowersLocked){
 			Forbid(iClient, true, "%s %t", PLUGIN_PREFIX, "forbidTowerLockedMidwave");
 			return;
 		}
@@ -461,10 +461,10 @@ stock void Tower_Drop(int iClient) {
 		return;
 	}
 	
-	if(g_bTowersLocked){
-			Forbid(iClient, true, "%s %t", PLUGIN_PREFIX, "forbidCantPlaceTowerMidwave");
-			return;
-		}
+	if(!g_hAllowPlacingTowersMidwave.BoolValue && g_bTowersLocked) {
+		Forbid(iClient, true, "%s %t", PLUGIN_PREFIX, "forbidCantPlaceTowerMidwave");
+		return;
+	}
 	
 	int iTower = g_iAttachedTower[iClient];
 	float fLocation[3], fAngles[3];
@@ -475,7 +475,7 @@ stock void Tower_Drop(int iClient) {
 	GetClientEyeAngles(iClient, fAngles);
 
 	if(!g_hCustomTowerPitch.BoolValue)
-	fAngles[0] = Tower_GetPitch(GetTowerId(iTower));
+		fAngles[0] = Tower_GetPitch(GetTowerId(iTower));
 
 	TeleportEntity(iTower, fLocation, fAngles, NULL_VECTOR);
 

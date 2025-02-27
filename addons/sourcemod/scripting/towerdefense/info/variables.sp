@@ -35,6 +35,8 @@ ConVar g_hTfBotQuota;
 ConVar g_hSvVisibleMaxPlayers;
 ConVar g_hMaxBotsOnField;
 ConVar g_hCustomTowerPitch;
+ConVar g_hAllowPlacingTowersMidwave;
+ConVar g_hAllowPickingTowersMidwave;
 
 /*==========  Handle  ==========*/
 
