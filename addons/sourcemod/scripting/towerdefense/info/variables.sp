@@ -66,6 +66,7 @@ char g_sPassword[8];
 
 int g_iMetalPackCount;
 KeyValues g_MetalPacks;
+KeyValues g_MetalPackGlows;
 
 /*==========================================
 =            Database Variables            =

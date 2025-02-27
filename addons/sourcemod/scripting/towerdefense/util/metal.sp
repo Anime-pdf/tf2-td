@@ -144,9 +144,14 @@ stock TDMetalPackReturn SpawnMetalPack2(TDMetalPackSpawnType iMetalPackSpawnType
 		
 		TeleportEntity(iMetalPack, fLocation, NULL_VECTOR, NULL_VECTOR);
 		
+		int iGlow = -1;
+		if(!TF2_HasGlow(iMetalPack))
+			iGlow = TF2_CreateGlow(iMetalPack);
+		
 		SDKHook(iMetalPack, SDKHook_Touch, OnMetalPackPickup);
 		
 		g_MetalPacks.SetNum(sMetal, iMetal);
+		g_MetalPackGlows.SetNum(sMetal, iGlow);
 		g_iMetalPackCount++;
 		iEntity = EntIndexToEntRef(iMetalPack);
 	}
@@ -171,8 +176,10 @@ public void OnMetalPackPickup(int iMetalPack, int iClient) {
 	HideAnnotation(iMetalPack);
 	
 	AcceptEntityInput(iMetalPack, "Kill");
+	AcceptEntityInput(g_MetalPackGlows.GetNum(sMetal), "Kill");
 	
 	g_MetalPacks.DeleteKey(sMetal);
+	g_MetalPackGlows.DeleteKey(sMetal);
 	g_iMetalPackCount--;
 }
 

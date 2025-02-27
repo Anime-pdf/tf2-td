@@ -44,6 +44,7 @@ public Plugin myinfo =
 #include "towerdefense/info/convars.sp"
 #include "towerdefense/info/keyvalues.sp"
 
+#include "towerdefense/util/glow.sp"
 #include "towerdefense/util/log.sp"
 #include "towerdefense/util/metal.sp"
 #include "towerdefense/util/steamid.sp"
