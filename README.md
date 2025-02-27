@@ -81,7 +81,7 @@ The following commands are available for administrators and players to interact 
 ### Admin Commands ###
 | Command       | Description                                                                 | Arguments                                                                 | Example          |
 |---------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------|------------------|
-| `sm_gm`       | Gives metal to the player (testing purposes).                               | `<#userid|name> <metal>`                                                  | `sm_gm @all 100` |
+| `sm_gm`       | Gives metal to the player (testing purposes).                               | `<#userid\|name> <metal>`                                                  | `sm_gm @all 100` |
 | `sm_r`        | Reloads the current map (testing purposes).                                 | None                                                                      | `sm_r`           |
 | `sm_sw`       | Sets the current wave (testing purposes).                                   | `<wave>`                                                                  | `sm_sw 5`        |
 | `sm_bt`       | Buys a tower (testing purposes).                                            | `<tower_id>`                                                              | `sm_bt 1`        |
