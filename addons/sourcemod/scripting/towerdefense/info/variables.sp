@@ -37,6 +37,7 @@ ConVar g_hMaxBotsOnField;
 ConVar g_hCustomTowerPitch;
 ConVar g_hAllowPlacingTowersMidwave;
 ConVar g_hAllowPickingTowersMidwave;
+ConVar g_hShowMetalInHudDefault;
 
 /*==========  Handle  ==========*/
 
@@ -98,6 +99,8 @@ char g_sServerIp[16];
 
 /*==========  Boolean  ==========*/
 
+bool g_bHudAvailable[MAXPLAYERS + 1];
+bool g_bHudMetal[MAXPLAYERS + 1];
 bool g_bCarryingObject[MAXPLAYERS + 1];
 bool g_bInsideNobuild[MAXPLAYERS + 1];
 bool g_bPickupSentry[MAXPLAYERS + 1];
@@ -106,6 +109,7 @@ bool g_bReplaceWeapon[MAXPLAYERS + 1][3];
 /*==========  Handle  ==========*/
 
 Handle g_hPlayerData;
+Handle g_hPlayerMetalHudTimer;
 
 /*==========  Float  ==========*/
 

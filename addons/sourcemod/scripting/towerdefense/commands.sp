@@ -32,6 +32,8 @@ stock void RegisterCommands() {
 	RegConsoleCmd("sm_t", Command_TransferMetal);
 	RegConsoleCmd("sm_transfer", Command_TransferMetal);
 	RegConsoleCmd("sm_givemetal", Command_TransferMetal);
+	RegConsoleCmd("sm_mhud", Command_ShowMetalHud);
+	RegConsoleCmd("sm_metalhud", Command_ShowMetalHud);
 
 	// Command Listeners
 	AddCommandListener(CommandListener_Build, "build");
@@ -392,6 +394,21 @@ public Action Command_TransferMetal(int iClient, int iArgs) {
 		CPrintToChat(iTarget, "%s %t", PLUGIN_PREFIX, "cmdTransferMetalReceived", iMetal, iClient);
 		CPrintToChat(iClient, "%s %t", PLUGIN_PREFIX, "cmdTransferMetalSent", iTarget, iMetal);
 	}
+
+	return Plugin_Continue;
+}
+
+public Action Command_ShowMetalHud(int iClient, int iArgs) {
+	if (!g_bEnabled) {
+		return Plugin_Handled;
+	}
+
+	g_bHudMetal[iClient] = !g_bHudMetal[iClient];
+
+	CPrintToChat(iClient, "%s %t", PLUGIN_PREFIX, g_bHudMetal[iClient] ? "cmdMetalHudOn" : "cmdMetalHudOff");
+
+	if (!g_bHudMetal[iClient]) // flush it
+		PrintToHud(iClient, ".");
 
 	return Plugin_Continue;
 }

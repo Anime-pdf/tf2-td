@@ -55,6 +55,7 @@ public Plugin myinfo =
 #include "towerdefense/handler/aoe.sp"
 #include "towerdefense/handler/buttons.sp"
 #include "towerdefense/handler/corners.sp"
+#include "towerdefense/handler/metalhud.sp"
 #include "towerdefense/handler/metalpacks.sp"
 #include "towerdefense/handler/panels.sp"
 #include "towerdefense/handler/player.sp"
@@ -415,6 +416,8 @@ public Action OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fV
 
 		TR_TraceRayFilter(fLocation, fViewAngles, MASK_VISIBLE, RayType_Infinite, TraceRayEntities, iClient);
 
+		g_bHudAvailable[iClient] = true;
+
 		if (TR_DidHit()) {
 			int iAimEntity = TR_GetEntityIndex();
 
@@ -460,6 +463,7 @@ public Action OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fV
 										--------------- \n\
 										%s",
 											   sName, Tower_GetPrice(iTowerId), Tower_GetPrice(iTowerId) / GetRealClientCount(true), sDamagetype, Tower_GetMaxLevel(iTowerId), sDescription);
+									g_bHudAvailable[iClient] = false;
 								}
 							}
 						}

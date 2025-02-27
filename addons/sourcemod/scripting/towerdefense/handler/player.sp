@@ -91,6 +91,8 @@ stock void Player_Connected(int iUserId, int iClient, const char[] sName, const 
 		Player_USetString(iUserId, PLAYER_IP_ADDRESS, sIp);
 		Server_UAddValue(g_iServerId, SERVER_CONNECTIONS, 1);
 
+		g_bHudAvailable[iClient]						  = true;
+		g_bHudMetal[iClient]							  = g_hShowMetalInHudDefault.BoolValue;
 		g_bCarryingObject[iClient]						  = false;
 		g_bReplaceWeapon[iClient][TFWeaponSlot_Primary]	  = false;
 		g_bReplaceWeapon[iClient][TFWeaponSlot_Secondary] = false;
@@ -102,6 +104,9 @@ stock void Player_Connected(int iUserId, int iClient, const char[] sName, const 
 		TF2_SetPlayerClass(iClient, TFClass_Engineer, false, true);
 
 		UpdateGameDescription();
+
+		if (g_hPlayerMetalHudTimer == null)
+			g_hPlayerMetalHudTimer = CreateTimer(0.2, Timer_ClientHudTick, _, TIMER_REPEAT);
 
 		Log(TDLogLevel_Debug, "Moved player %N to the Defenders team as Engineer", iClient);
 	}
@@ -124,6 +129,11 @@ stock void Player_OnDisconnectPre(int iUserId, int iClient) {
 	if (GetRealClientCount(true) <= 1) {	// the disconnected player is counted (thus 1 not 0)
 		Database_ServerStatsUpdate();
 		CreateTimer(60.0, Timer_Reset);	   // Give Queries time to send
+	}
+
+	if (g_hPlayerMetalHudTimer != null) {
+		CloseHandle(g_hPlayerMetalHudTimer);
+		g_hPlayerMetalHudTimer = null;
 	}
 }
 

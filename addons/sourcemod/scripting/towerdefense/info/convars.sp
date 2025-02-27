@@ -15,6 +15,7 @@ stock void CreateConVars() {
 	g_hCustomTowerPitch = CreateConVar("td_custom_tower_pitch", "1", "Set pitch to player's, not to default", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hAllowPickingTowersMidwave = CreateConVar("td_allow_picking_towers_midwave", "0", "Allow players to pickup towers midwave", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hAllowPlacingTowersMidwave = CreateConVar("td_allow_placing_towers_midwave", "1", "Allow players to place towers midwave", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_hShowMetalInHudDefault = CreateConVar("td_show_metal_hud_default", "1", "Allow players to place towers midwave", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
 }
 
 stock void LoadConVars() {
@@ -26,6 +27,7 @@ stock void LoadConVars() {
 	g_hCustomTowerPitch.AddChangeHook(OnConVarChanged);
 	g_hAllowPickingTowersMidwave.AddChangeHook(OnConVarChanged);
 	g_hAllowPlacingTowersMidwave.AddChangeHook(OnConVarChanged);
+	g_hShowMetalInHudDefault.AddChangeHook(OnConVarChanged);
 }
 
 stock void SetConVars() {
