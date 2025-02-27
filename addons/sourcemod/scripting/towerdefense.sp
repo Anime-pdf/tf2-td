@@ -42,6 +42,7 @@ public Plugin myinfo =
 #include "towerdefense/info/enums.sp"
 #include "towerdefense/info/variables.sp"
 #include "towerdefense/info/convars.sp"
+#include "towerdefense/info/keyvalues.sp"
 
 #include "towerdefense/util/log.sp"
 #include "towerdefense/util/metal.sp"
@@ -113,6 +114,8 @@ public void OnPluginStart() {
 	CreateConVars();
 	LoadConVars();
 	SetConVars();
+
+	CreateTDKeyValues();
 
 	SetPassword("WaitingForServerToInitialize", false);
 }

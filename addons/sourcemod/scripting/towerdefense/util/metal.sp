@@ -129,7 +129,7 @@ stock TDMetalPackReturn SpawnMetalPack2(TDMetalPackSpawnType iMetalPackSpawnType
 	DispatchKeyValue(iMetalPack, "model", sModelPath);
 	
 	char sMetal[32];
-	IntToString(iMetal, sMetal, sizeof(sMetal));
+	IntToString(iMetalPack, sMetal, sizeof(sMetal));
 	
 	DispatchKeyValue(iMetalPack, "targetname", sMetal);
 	
@@ -146,6 +146,7 @@ stock TDMetalPackReturn SpawnMetalPack2(TDMetalPackSpawnType iMetalPackSpawnType
 		
 		SDKHook(iMetalPack, SDKHook_Touch, OnMetalPackPickup);
 		
+		g_MetalPacks.SetNum(sMetal, iMetal);
 		g_iMetalPackCount++;
 		iEntity = EntIndexToEntRef(iMetalPack);
 	}
@@ -163,17 +164,15 @@ public void OnMetalPackPickup(int iMetalPack, int iClient) {
 	// TODO(hurp): Disperse / give metal to each client instead of just one.
 	
 	char sMetal[32];
-	GetEntPropString(iMetalPack, Prop_Data, "m_iName", sMetal, sizeof(sMetal));
-	
-	int iMetal = StringToInt(sMetal);
-	
-	AddClientMetal(iClient, iMetal);
+	IntToString(iMetalPack, sMetal, sizeof(sMetal));
+	AddClientMetal(iClient, g_MetalPacks.GetNum(sMetal));
 	ResupplyClient(iClient, true, 0.25);
 	EmitSoundToClient(iClient, "items/gunpickup2.wav");
 	HideAnnotation(iMetalPack);
 	
 	AcceptEntityInput(iMetalPack, "Kill");
 	
+	g_MetalPacks.DeleteKey(sMetal);
 	g_iMetalPackCount--;
 }
 

@@ -51,7 +51,6 @@ float fMultiplier[50];
 int g_iBuildingLimit[TDBuildingType];
 int g_iHaloMaterial;
 int g_iLaserMaterial;
-int g_iMetalPackCount;
 int iMaxWaves;
 int iMaxMultiplierTypes;
 int g_iBotsToSpawn;
@@ -62,6 +61,11 @@ int g_iMaxBotsOnField;
 /*==========  String  ==========*/
 
 char g_sPassword[8];
+
+/*==========  Metal Packs  ==========*/
+
+int g_iMetalPackCount;
+KeyValues g_MetalPacks;
 
 /*==========================================
 =            Database Variables            =
