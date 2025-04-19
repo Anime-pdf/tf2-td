@@ -288,7 +288,7 @@ public Action ShowMotd(Handle hTimer, Handle hPack) {
 	KvSetNum(hKeyValues, "type", MOTDPANEL_TYPE_URL);
 
 	KvSetString(hKeyValues, "title", "Welcome to TF2 Tower Defense!");
-	KvSetString(hKeyValues, "msg", "https://tf2td.github.io/towerdefense/");
+	KvSetString(hKeyValues, "msg", "https://https://towerdefense.animepdf.me/");
 
 	ShowVGUIPanel(iClient, "info", hKeyValues, true);
 
