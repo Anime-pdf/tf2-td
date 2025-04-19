@@ -41,7 +41,7 @@ Maps - [mani](http://steamcommunity.com/profiles/76561198002201102/), [fatboy](h
 
 1. Create a dedicated TF2 server and install metamod + sourcemod, and the extensions and plugins above. Ensure that the server and plugins work before continuing.
 2. Download the [latest release](https://github.com/tf2td/towerdefense/releases) of TF2TD.
-3. On your MySQL/MariaDB server, create a new `towerdefense` database and user. Import the [`tf2td.sql`](addons/sourcemod/schema/tf2td.sql) file into your database.
+3. On your MySQL/MariaDB server, create a new `towerdefense` database and user. Import the [`tf2td.sql`](addons/sourcemod/schema/tf2td.sql)* file into your database.
 4. Add the database information to your sourcemod `databases.cfg` file (an example can be found [here](addons/sourcemod/configs/databases_example.cfg)).
 5. Copy [`towerdefense.cfg`](cfg/towerdefense.cfg) to your server's `tf/cfg` folder. This file has settings that need to be executed when the server starts. Add the following to the end of your server's `cfg/server.cfg` file to do so:
    
@@ -50,6 +50,8 @@ Maps - [mani](http://steamcommunity.com/profiles/76561198002201102/), [fatboy](h
 6. Copy the [`tf2tdcustom/`](custom) folder and its contents into your server's `tf/custom/` directory.
 7. Copy `towerdefense.smx` to your sourcemod `tf/addons/sourcemod/plugins` folder.
 8. Start your server with the map `td_firstone_v11b`. You should be able to connect and play if everything was set up correctly.
+
+\* **If you want to use sqlite, you need to import [`tf2td_sqlite.sql`](addons/sourcemod/schema/tf2td_sqlite.sql) instead.**
 
 ---
 
