@@ -59,8 +59,9 @@ stock void Database_AddServer() {
 
 	g_hDatabase.Format(sQuery, sizeof(sQuery),
 		"INSERT INTO `server` (`ip`, `port`, `created`, `updated`) " ...
-		"VALUES ('%s', %d, UTC_TIMESTAMP(), UTC_TIMESTAMP())",
-		g_sServerIp, g_iServerPort);
+		"VALUES ('%s', %d, %s)",
+		g_sServerIp, g_iServerPort,
+		g_hSqlite ? "datetime(\"now\"), datetime(\"now\")" : "UTC_TIMESTAMP(), UTC_TIMESTAMP()");
 
 	g_hDatabase.Query(Database_OnAddServer, sQuery, 0);
 }
@@ -110,8 +111,9 @@ stock void Database_UpdateServerPlayerCount() {
 		"UPDATE `server` " ...
 		"SET `players` = %d " ...
 		"WHERE `server_id` = %d " ...
-		"LIMIT 1",
-		GetRealClientCount(), g_iServerId);
+		"%s",
+		GetRealClientCount(), g_iServerId,
+		g_hSqlite ? "" : "LIMIT 1");
 
 	g_hDatabase.Query(Database_OnUpdateServerPlayerCount, sQuery, 0);
 }
@@ -146,10 +148,12 @@ stock void Database_UpdateServer() {
 			"`version` = '%s', " ...
 			"`password` = '%s', " ...
 			"`players` = %d, " ...
-			"`updated` = UTC_TIMESTAMP() " ...
+			"`updated` = %s " ...
 		"WHERE `server_id` = %d  " ...
-		"LIMIT 1",
-		sServerNameSave, PLUGIN_VERSION, sPasswordSave, GetRealClientCount(), g_iServerId);
+		"%s",
+		sServerNameSave, PLUGIN_VERSION, sPasswordSave, GetRealClientCount(),
+		g_hSqlite ? "datetime(\"now\")" : "UTC_TIMESTAMP()", g_iServerId,
+		g_hSqlite ? "" : "LIMIT 1");
 
 	g_hDatabase.Query(Database_OnUpdateServer, sQuery, 0);
 }
@@ -195,8 +199,9 @@ public void Database_OnUpdateServer(Handle hDriver, Handle hResult, const char[]
 				"UPDATE `server` " ...
 				"SET `map_id` = %d " ...
 				"WHERE `server_id` = %d " ...
-				"LIMIT 1",
-				g_iServerMap, g_iServerId);
+				"%s",
+				g_iServerMap, g_iServerId,
+				g_hSqlite ? "" : "LIMIT 1");
 
 			g_hDatabase.Query(Database_OnUpdateServer, sQuery, 2);
 		} else if (iData == 2) {
@@ -306,8 +311,15 @@ public void Database_OnCheckServerSettings(Handle hDriver, Handle hResult, const
 stock void Database_CheckServerConfig() {
 	char sQuery[512];
 
+	char sConcat[128];
+	if (g_hSqlite) {
+		Format(sConcat, sizeof(sConcat), "(`variable` || %s || `value` || %s)", "\" \"\"", "\"\"\"");
+	} else {
+		Format(sConcat, sizeof(sConcat), "CONCAT(`variable`, %s, `value`, %s)", "' \"\"'", "'\"'");
+	}
+
 	g_hDatabase.Format(sQuery, sizeof(sQuery),
-		"SELECT CONCAT(`variable`, ' \"', `value`, '\"') " ...
+		"SELECT %s " ...
 		"FROM `config` " ...
 		"INNER JOIN `server` " ...
 			"ON (`server_id` = %d) " ...
@@ -315,6 +327,7 @@ stock void Database_CheckServerConfig() {
 			"ON (`server`.`server_settings_id` = `server_settings`.`server_settings_id`) " ...
 		"WHERE `config_id` >= `config_start` AND `config_id` <= `config_end` " ...
 		"ORDER BY `config_id` ASC",
+		sConcat,
 		g_iServerId);
 
 	g_hDatabase.Query(Database_OnCheckServerConfig, sQuery);
@@ -359,8 +372,9 @@ stock void Database_SetServerPassword(const char[] sPassword, bool bReloadMap) {
 		"UPDATE `server` " ...
 		"SET `password` = '%s' " ...
 		"WHERE `server_id` = %d " ...
-		"LIMIT 1",
-		sPasswordSave, g_iServerId);
+		"%s",
+		sPasswordSave, g_iServerId,
+		g_hSqlite ? "" : "LIMIT 1");
 
 	DataPack hPack = new DataPack();
 

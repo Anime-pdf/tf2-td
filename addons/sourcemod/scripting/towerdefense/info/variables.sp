@@ -31,6 +31,7 @@ bool g_bCanGetUnlocks;
 /*==========  ConVar  ==========*/
 
 ConVar g_hEnabled;
+ConVar g_hSqlite;
 ConVar g_hTfBotQuota;
 ConVar g_hSvVisibleMaxPlayers;
 ConVar g_hMaxBotsOnField;

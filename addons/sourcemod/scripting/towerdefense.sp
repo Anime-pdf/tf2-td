@@ -18,7 +18,7 @@
 #define PLUGIN_NAME	   "TF2 Tower Defense"
 #define PLUGIN_AUTHOR  "floube, benedevil, hurpdurp, dragonisser, Animepdf"
 #define PLUGIN_DESC	   "Stop enemies from crossing a map by buying towers and building up defenses."
-#define PLUGIN_VERSION "2.1.4"
+#define PLUGIN_VERSION "2.1.5"
 #define PLUGIN_URL	   "https://github.com/Anime-pdf/tf2-td"
 #define PLUGIN_PREFIX  "[TF2TD]"
 

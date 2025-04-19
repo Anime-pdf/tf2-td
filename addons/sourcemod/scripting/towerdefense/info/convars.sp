@@ -11,6 +11,7 @@
 stock void CreateConVars() {
 	CreateConVar("td_version", PLUGIN_VERSION, "Tower Defense Version", FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	g_hEnabled = CreateConVar("td_enabled", "1", "Enables/disables Tower Defense", FCVAR_DONTRECORD, true, 0.0, true, 1.0);
+	g_hSqlite = CreateConVar("td_sqlite", "0", "Enables/disables sqlite-friendly querries Tower Defense", FCVAR_REPLICATED | FCVAR_DONTRECORD, true, 0.0, true, 1.0);
 	g_hMaxBotsOnField = CreateConVar("td_max_bots_on_field", "8", "Max bots simultaneously on field. Might be actually lower than set due to maxplayer limit");
 	g_hCustomTowerPitch = CreateConVar("td_custom_tower_pitch", "1", "Set pitch to player's, not to default", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hAllowPickingTowersMidwave = CreateConVar("td_allow_picking_towers_midwave", "0", "Allow players to pickup towers midwave", FCVAR_REPLICATED | FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -20,6 +21,7 @@ stock void CreateConVars() {
 
 stock void LoadConVars() {
 	g_hEnabled.AddChangeHook(OnConVarChanged);
+	g_hSqlite.AddChangeHook(OnConVarChanged);
 	g_hMaxBotsOnField.AddChangeHook(OnConVarChanged);
 	g_hTfBotQuota = FindConVar("tf_bot_quota");
 	g_hSvVisibleMaxPlayers = FindConVar("sv_visiblemaxplayers");

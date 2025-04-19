@@ -41,7 +41,7 @@ Maps - [mani](http://steamcommunity.com/profiles/76561198002201102/), [fatboy](h
 
 1. Create a dedicated TF2 server and install metamod + sourcemod, and the extensions and plugins above. Ensure that the server and plugins work before continuing.
 2. Download the [latest release](https://github.com/tf2td/towerdefense/releases) of TF2TD.
-3. On your MySQL/MariaDB server, create a new `towerdefense` database and user. Import the [`tf2td.sql`](addons/sourcemod/schema/tf2td.sql)* file into your database.
+3. On your MySQL/MariaDB server, create a new `towerdefense` database and user. Import the [`tf2td.sql`](addons/sourcemod/schema/tf2td.sql) file into your database.
 4. Add the database information to your sourcemod `databases.cfg` file (an example can be found [here](addons/sourcemod/configs/databases_example.cfg)).
 5. Copy [`towerdefense.cfg`](cfg/towerdefense.cfg) to your server's `tf/cfg` folder. This file has settings that need to be executed when the server starts. Add the following to the end of your server's `cfg/server.cfg` file to do so:
    
@@ -51,7 +51,15 @@ Maps - [mani](http://steamcommunity.com/profiles/76561198002201102/), [fatboy](h
 7. Copy `towerdefense.smx` to your sourcemod `tf/addons/sourcemod/plugins` folder.
 8. Start your server with the map `td_firstone_v11b`. You should be able to connect and play if everything was set up correctly.
 
-\* **If you want to use sqlite, you need to import [`tf2td_sqlite.sql`](addons/sourcemod/schema/tf2td_sqlite.sql) instead.**
+---
+
+## SQLite Notice
+
+To use SQLite you need to:
+1. Change database provider to `sqlite` (in `databases.cfg`).
+2. Create `towerdefense.sq3` (corresponds to `database` field in `databases.cfg`) in `tf/addons/sourcemod/data/sqlite`.
+3. Import [`tf2td_sqlite.sql`](addons/sourcemod/schema/tf2td_sqlite.sql) into `towerdefense.sq3`.
+4. Add `td_sqlite 1` to your config file.
 
 ---
 
@@ -68,6 +76,7 @@ The following ConVars (console variables) are used to configure the behavior of 
 | ConVar Name                      | Default Value | Description                                                                 | Min Value | Max Value |
 |----------------------------------|---------------|-----------------------------------------------------------------------------|-----------|-----------|
 | `td_enabled`                     | `1`           | Enables or disables the Tower Defense plugin.                               | `0`       | `1`       |
+| `td_sqlite`                      | `0`           | Enables or disables SQLite-compatible mode.                                 | `0`       | `1`       |
 | `td_max_bots_on_field`           | `8`           | Maximum number of bots allowed on the field simultaneously.                 | `1`       | N/A       |
 | `td_custom_tower_pitch`          | `1`           | Sets the tower's pitch to match the player's pitch instead of the default.  | `0`       | `1`       |
 | `td_allow_picking_towers_midwave`| `0`           | Allows players to pick up towers during a wave.                             | `0`       | `1`       |
